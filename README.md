@@ -1,59 +1,57 @@
-# CourseManagement
+# 🎓 Course Management System (CMS Pro) - Angular 19
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.21.
+A sophisticated, high-performance Learning Management System built with **Angular 19**. This project showcases advanced architectural patterns, including **NgRx** for state management, **Lazy Loading** for performance, and a fully responsive **Admin Dashboard**.
 
-## Development server
+## 🚀 Advanced Technical Architecture
 
-To start a local development server, run:
+### ⚡ Performance Optimization: Lazy Loading
+To ensure lightning-fast initial load times, the application implements **Lazy Loading** for all major feature modules. Components are only loaded when the user navigates to their specific routes, significantly reducing the initial bundle size.
+* **Admin Module**: Lazily loaded for administrative tasks.
+* **Instructor Module**: Dedicated lazy-loaded path for course management.
+* **Student Module**: Optimized path for learning and course discovery.
 
-```bash
-ng serve
-```
+### 🧠 State Management: NgRx (Redux Pattern)
+The project utilizes **NgRx** for a centralized and predictable state management system.
+* **Actions & Reducers**: Custom logic for handling `Courses`, `Users`, `Enrollments`, `Lessons`, and `Wishlist`.
+* **Effects**: Side-effect management for asynchronous API calls.
+* **Selectors**: Highly optimized data retrieval from the store.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🌟 Comprehensive Feature List
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🖥️ Professional Admin Dashboard
+- **Metric Analytics**: Custom-designed cards showing total Students (4), Active Courses (6), and Instructors (3).
+- **Admin Layout**: A specialized sidebar and header layout for administrative control.
+- **Quick Actions**: Immediate access to "Manage Users" and "Add New Course" with interactive UI.
 
-```bash
-ng generate component component-name
-```
+### 👨‍🏫 Instructor Interface
+- **Course Authoring**: Tools for instructors to create and manage their curriculum.
+- **Lesson Management**: Specialized components for organizing course content.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 👩‍🎓 Student Portal
+- **Course Marketplace**: Modern card-based UI for browsing available courses.
+- **My Learning**: A personalized area for tracked enrollments and wishlist items.
 
-```bash
-ng generate --help
-```
+### 🔒 Security & Routing
+- **Role-Based Access Control (RBAC)**: Strict `AuthGuard` and `RoleGuard` implementations to protect routes based on user type (Admin/Instructor/Student).
+- **403 Access Denied**: A custom-designed "Unauthorized" page for handling restricted access attempts.
+- **Dynamic Navbar**: Automatically adjusts links and visibility based on the user's authentication state and role.
 
-## Building
+---
 
-To build the project run:
+## 🛠️ Tech Stack & Tools
+- **Framework**: Angular 19 (Standalone Architecture).
+- **State Management**: NgRx Store, Effects, and DevTools.
+- **UI Framework**: Bootstrap 5 + FontAwesome Icons.
+- **Backend Simulation**: JSON Server (REST API).
+- **Environment**: Multi-environment configuration (Dev/Prod).
 
-```bash
-ng build
-```
+## 📁 Key Directory Structure
+- `src/app/Store`: Centralized NgRx state management.
+- `src/app/Guards`: Security logic for route protection.
+- `src/app/Models`: TypeScript interfaces for robust type checking (`Course`, `User`, `Statistics`).
+- `src/app/Components`: Feature-based component organization (Admin, Auth, Student, Shared).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+*Developed with ❤️ by [Sohila Tarek](https://github.com/sohila558) - Backend & Frontend Engineer*
