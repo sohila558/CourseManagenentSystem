@@ -9,11 +9,10 @@ import { loadEnrollments } from '../../../Store/Enrollments/enrollment.action';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { loginSuccess } from '../../../Store/Auth/auth.action';
 import { LayoutComponent } from '../layout/layout.component';
-import { NavBarComponent } from "../../Shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-instructor-dashboard',
-  imports: [CommonModule, AsyncPipe, LayoutComponent, NavBarComponent],
+  imports: [CommonModule, AsyncPipe, LayoutComponent],
   templateUrl: './instructor-dashboard.component.html',
   styleUrl: './instructor-dashboard.component.css'
 })

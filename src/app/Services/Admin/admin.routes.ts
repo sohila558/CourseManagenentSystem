@@ -15,11 +15,11 @@ export const ADMIN_ROUTES: Routes = [
                 component: AdminDashboardComponent
             },
             {
-                path: 'courses',
+                path: 'manage-courses',
                 component: ManageCoursesComponent
             },
             {
-                path: 'users',
+                path: 'manage-users',
                 component: ManageUsersComponent
             },
             {
