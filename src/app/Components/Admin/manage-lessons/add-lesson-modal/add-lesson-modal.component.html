@@ -1,0 +1,46 @@
+<div class="modal fade" id="lessonModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold">
+                    {{ lessonToEdit ? 'Edit Lesson' : 'Add New Lesson' }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Lesson Title</label>
+                        <input type="text" formControlName="title" class="form-control"
+                            placeholder="e.g. Introduction to Angular">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold small">Order</label>
+                            <input type="number" formControlName="order" class="form-control">
+                        </div>
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label fw-bold small">Video URL (Optional)</label>
+                            <input type="text" formControlName="videoUrl" class="form-control"
+                                placeholder="YouTube/Vimeo link">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Lesson Content</label>
+                        <textarea formControlName="content" class="form-control" rows="4"
+                            placeholder="Describe what this lesson covers..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary px-4" [disabled]="lessonForm.invalid" data-bs-dismiss="modal">
+                        {{ lessonToEdit ? 'Save Changes' : 'Add Lesson' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

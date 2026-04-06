@@ -1,0 +1,47 @@
+<div class="card border-2 shadow-sm rounded-3 overflow-hidden">
+  <table class="table table-hover align-middle mb-2">
+    <thead class="bg-primary text-white">
+      <tr>
+        <th class="ps-4 py-3">User Information</th>
+        <th>Role</th>
+        <th>Enrolled Courses</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td class="ps-4">
+          <div class="d-flex align-items-center">
+            <div class="avatar-circle me-3 bg-light text-primary fw-bold">
+              {{ user.name[0] }}
+            </div>
+            <div>
+              <div class="fw-bold text-dark">{{ user.name }}</div>
+              <small class="text-muted">{{ user.email }}</small>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="badge rounded-pill px-3 py-2"
+            [ngClass]="user.role === 'Admin' ? 'bg-danger-subtle text-danger' : 'bg-primary-subtle text-primary'">
+            {{ user.role }}
+          </span>
+        </td>
+        <td>
+          <span class="badge bg-info-subtle text-info border border-info">
+            {{ getStudentCourses(user.id) }}
+          </span>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-light border text-primary me-2" (click)="onEdit(user)" data-bs-toggle="modal"
+            data-bs-target="#addUserModal">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-light border text-danger" (click)="onDelete(user.id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

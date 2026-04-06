@@ -1,0 +1,16 @@
+/* تنسيق الـ Card الأساسي لجعلها بارزة */
+.course-card {
+  transition: all 0.3s ease-in-out; 
+  border: 1px solid rgba(0, 0, 0, 0.05); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important; 
+}
+
+.course-card:hover {
+  transform: translateY(-8px); 
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15) !important; 
+}
+
+.course-card:hover .btn-outline-primary {
+  background-color: var(--bs-primary);
+  color: #fff;
+}

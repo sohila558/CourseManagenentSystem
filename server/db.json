@@ -1,0 +1,240 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Sohila Tarek",
+      "email": "admin@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Admin",
+      "token": "fake-jwt-token-1"
+    },
+    {
+      "id": "2",
+      "name": "Ahmed Mohamed",
+      "email": "student@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Student",
+      "token": "fake-jwt-token-2"
+    },
+    {
+      "id": "692",
+      "name": "Mahmoud Rayan",
+      "email": "instructor@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Instructor",
+      "token": "fake-jwt-token-0.056"
+    },
+    {
+      "id": "3",
+      "name": "Sarah Ahmed",
+      "email": "sarah@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Student",
+      "token": "fake-jwt-token-3"
+    },
+    {
+      "id": "4",
+      "name": "Dr. Omar Khaled",
+      "email": "omar@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Instructor",
+      "token": "fake-jwt-token-4"
+    },
+    {
+      "id": "5",
+      "name": "Laila Yassin",
+      "email": "laila@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Student",
+      "token": "fake-jwt-token-5"
+    },
+    {
+      "id": "6",
+      "name": "Youssef Ali",
+      "email": "youssef@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Student",
+      "token": "fake-jwt-token-6"
+    },
+    {
+      "id": "7",
+      "name": "Eng. Mona Hassan",
+      "email": "mona@test.com",
+      "password": "P@ssW0rd123",
+      "role": "Instructor",
+      "token": "fake-jwt-token-7"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "7",
+      "courseId": "c102",
+      "courseTitle": "Full-Stack .NET Core",
+      "studentId": "6",
+      "studentName": "Youssef Ali",
+      "instructorName": "Mahmoud Rayan",
+      "enrollDate": "2026-04-10"
+    },
+    {
+      "id": "dpq2hjgbj",
+      "courseId": "c101",
+      "courseTitle": "Angular Masterclass",
+      "courseImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070",
+      "enrollDate": "2026-04-06T04:02:30.948Z",
+      "status": "Active",
+      "studentId": "3",
+      "studentName": "Sarah Ahmed",
+      "instructorName": "Mahmoud Rayan"
+    },
+    {
+      "id": "ctkjow5s3",
+      "courseId": "c102",
+      "courseTitle": "Full-Stack .NET Core",
+      "courseImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070",
+      "enrollDate": "2026-04-06T04:53:14.263Z",
+      "status": "Active",
+      "studentId": "3",
+      "studentName": "Sarah Ahmed",
+      "instructorName": "Mahmoud Rayan"
+    }
+  ],
+  "courses": [
+    {
+      "id": "c101",
+      "title": "Angular Masterclass",
+      "category": "Development",
+      "instructorName": "Mahmoud Rayan",
+      "description": "Master Angular 17+ from basics to advanced state management with NgRx.",
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070"
+    },
+    {
+      "id": "c102",
+      "title": "Full-Stack .NET Core",
+      "category": "Development",
+      "instructorName": "Mahmoud Rayan",
+      "description": "Build enterprise apps with C#, .NET Web API, and SQL Server.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070"
+    },
+    {
+      "id": "c103",
+      "title": "UI/UX Design Essentials",
+      "category": "Design",
+      "instructorName": "Dr. Omar Khaled",
+      "description": "Modern UI design principles using Figma and user research.",
+      "image": "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=2070"
+    },
+    {
+      "id": "c104",
+      "title": "Data Science with Python",
+      "category": "Data Science",
+      "instructorName": "Dr. Omar Khaled",
+      "description": "Machine learning and data analysis using Python and Pandas.",
+      "image": "https://images.unsplash.com/photo-1551288049-bbda38a10476?q=80&w=2070"
+    },
+    {
+      "id": "c105",
+      "title": "Modern CSS with Sass",
+      "category": "Design",
+      "instructorName": "Eng. Mona Hassan",
+      "description": "Advanced styling techniques and responsive design systems.",
+      "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070"
+    },
+    {
+      "id": "c106",
+      "title": "Cloud Computing (Azure)",
+      "category": "IT & Software",
+      "instructorName": "Mahmoud Rayan",
+      "description": "Deploying and managing scalable apps on Microsoft Azure.",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2070"
+    }
+  ],
+  "statistics": {
+    "totalStudents": "320",
+    "activeCourses": "24",
+    "totalInstructors": "15"
+  },
+  "lessons": [
+    {
+      "id": "l1",
+      "courseId": "c101",
+      "title": "Introduction to Angular",
+      "description": "Architecture and Setup.",
+      "videoUrl": "https://www.youtube.com/watch?v=k5E2AVpwsko",
+      "order": 1
+    },
+    {
+      "id": "l2",
+      "courseId": "c101",
+      "title": "RxJS Observables",
+      "description": "Reactive programming basics.",
+      "videoUrl": "https://www.youtube.com/watch?v=Tux1nhBPl_w",
+      "order": 2
+    },
+    {
+      "id": "l4",
+      "courseId": "c102",
+      "title": "C# Advanced Concepts",
+      "description": "Generics and LINQ.",
+      "videoUrl": "https://www.youtube.com/watch?v=7uK010Z5v9w",
+      "order": 1
+    },
+    {
+      "id": "l5",
+      "courseId": "c102",
+      "title": "Entity Framework Core",
+      "description": "Database Management.",
+      "videoUrl": "https://www.youtube.com/watch?v=reXpT-5P2fA",
+      "order": 2
+    },
+    {
+      "id": "l6",
+      "courseId": "c103",
+      "title": "Figma for Beginners",
+      "description": "Learning the interface.",
+      "videoUrl": "https://www.youtube.com/watch?v=FTFaQW9AfG0",
+      "order": 1
+    },
+    {
+      "id": "l7",
+      "courseId": "c103",
+      "title": "Prototyping in Figma",
+      "description": "Creating interactive flows.",
+      "videoUrl": "https://www.youtube.com/watch?v=fXv3fD1-7YQ",
+      "order": 2
+    },
+    {
+      "id": "l8",
+      "courseId": "c105",
+      "title": "Sass Variables & Mixins",
+      "description": "Optimizing CSS code.",
+      "videoUrl": "https://www.youtube.com/watch?v=Zz6eOVaaelI",
+      "order": 1
+    }
+  ],
+  "wishlist": [
+    {
+      "id": "edu2zauyh",
+      "courseId": "c101",
+      "courseTitle": "Angular Masterclass",
+      "courseImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070",
+      "addedDate": "2026-04-06T04:28:56.711Z",
+      "userId": "3"
+    },
+    {
+      "id": "a07np0qq5",
+      "courseId": "c106",
+      "courseTitle": "Cloud Computing (Azure)",
+      "courseImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2070",
+      "addedDate": "2026-04-06T05:01:17.904Z",
+      "userId": "3"
+    },
+    {
+      "id": "tk9vbdntc",
+      "courseId": "c105",
+      "courseTitle": "Modern CSS with Sass",
+      "courseImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070",
+      "addedDate": "2026-04-06T05:01:45.733Z",
+      "userId": "3"
+    }
+  ]
+}

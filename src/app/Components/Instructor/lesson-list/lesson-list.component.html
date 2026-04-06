@@ -1,0 +1,126 @@
+<div class="container py-5">
+  <nav class="mb-4">
+    <a routerLink="/instructor/my-courses" class="btn btn-link p-0 text-muted text-decoration-none fw-medium shadow-none">
+      <i class="bi bi-arrow-left-short fs-4 align-middle"></i> Back to My Courses
+    </a>
+  </nav>
+
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end border-bottom pb-4 mb-5">
+    <div>
+      <h6 class="text-primary fw-bold text-uppercase mb-2" style="letter-spacing: 1px;">Course Content</h6>
+      <h1 class="fw-bold m-0 display-6">
+        {{ (course$ | async)?.title || 'Loading Course...' }}
+      </h1>
+    </div>
+    <div class="mt-3 mt-md-0">
+      <button class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm" 
+              data-bs-toggle="modal" data-bs-target="#addLessonModal">
+        <i class="bi bi-plus-lg me-2"></i> Add New Lesson
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    @if (isLoading$ | async) {
+      <div class="d-flex justify-content-center align-items-center py-5 w-100">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    } @else {
+      @for (lesson of (lessons$ | async); track lesson.id) {
+      <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden lesson-card-hover">
+          <div class="card-body p-4 d-flex align-items-center">
+            
+            <div class="lesson-badge bg-primary-subtle text-primary fw-bold rounded-circle d-flex align-items-center justify-content-center me-4" style="min-width: 50px; height: 50px;">
+              {{ $index + 1 }}
+            </div>
+
+            <div class="flex-grow-1">
+              <h5 class="fw-bold mb-1 text-dark">{{ lesson.title }}</h5>
+              <p class="text-muted mb-0 small">{{ lesson.description }}</p>
+            </div>
+
+            <div class="d-flex gap-2 align-items-center ms-3">
+              <a [href]="lesson.videoUrl" target="_blank" class="btn btn-outline-primary rounded-pill px-3 btn-sm fw-medium">
+                <i class="bi bi-play-circle-fill me-1"></i> Watch
+              </a>
+              <button class="btn btn-outline-danger border-0 rounded-circle p-2" 
+                      title="Delete" (click)="deleteLesson(lesson.id)">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      } @empty {
+        <div class="col-12 text-center py-5 bg-light rounded-4 border-2 border-dashed">
+          <i class="bi bi-folder2-open text-muted" style="font-size: 3.5rem;"></i>
+          <h4 class="text-muted mt-3">This course is empty!</h4>
+          <p class="text-secondary">Click the "Add New Lesson" button to start building your course.</p>
+        </div>
+      }
+    }
+  </div>
+</div>
+
+<div class="modal fade" id="addLessonModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Add New Lesson</h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body py-4">
+          
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Lesson Title</label>
+            <input type="text" formControlName="title" 
+                   class="form-control rounded-3 shadow-none" 
+                   [class.is-invalid]="lessonForm.get('title')?.invalid && lessonForm.get('title')?.touched"
+                   placeholder="e.g. Introduction to Components">
+            @if (lessonForm.get('title')?.invalid && lessonForm.get('title')?.touched) {
+              <div class="text-danger small mt-1">Title is required.</div>
+            }
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Video URL</label>
+            <input type="text" formControlName="videoUrl" 
+                   class="form-control rounded-3 shadow-none"
+                   [class.is-invalid]="lessonForm.get('videoUrl')?.invalid && lessonForm.get('videoUrl')?.touched"
+                   placeholder="https://youtube.com/...">
+            @if (lessonForm.get('videoUrl')?.invalid && lessonForm.get('videoUrl')?.touched) {
+              <div class="text-danger small mt-1">Video URL is required.</div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Description</label>
+            <textarea formControlName="description" 
+                      class="form-control rounded-3 shadow-none" 
+                      [class.is-invalid]="lessonForm.get('description')?.invalid && lessonForm.get('description')?.touched"
+                      rows="3" 
+                      placeholder="Brief about this lesson..."></textarea>
+            @if (lessonForm.get('description')?.invalid && lessonForm.get('description')?.touched) {
+              <div class="text-danger small mt-1">Description is required.</div>
+            }
+          </div>
+
+        </div>
+        
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light rounded-pill px-4 fw-medium" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" [disabled]="lessonForm.invalid" 
+                  class="btn btn-primary rounded-pill px-4 shadow-sm fw-bold" 
+                  data-bs-dismiss="modal">
+            <i class="bi bi-check-lg me-1"></i> Save Lesson
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

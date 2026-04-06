@@ -1,0 +1,71 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <button class="btn btn-sm btn-outline-secondary mb-2" [routerLink]="['/admin/courses']">
+                <i class="fas fa-arrow-left"></i> Back to Courses
+            </button>
+            <h2 class="text-primary fw-bold mb-0">Course Curriculm</h2>
+            <p class="text-muted small">Manage lessons for Course ID: {{ courseId }}</p>
+        </div>
+        <button class="btn btn-primary px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#lessonModal"
+            (click)="clearSelected()">
+            <i class="fas fa-plus-circle me-2"></i>Add New Lesson
+        </button>
+    </div>
+    <div class="card border-2 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-2">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="ps-3">Order</th>
+                        <th>Lesson Title</th>
+                        <th>Content Preview</th>
+                        <th>Video</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (lesson of (lessons$ | async); track lesson.id) {
+                    <tr>
+                        <td class="ps-3">
+                            <span class="badge bg-secondary text-white">{{ lesson.id }}</span>
+                        </td>
+                        <td class="fw-bold">{{ lesson.title }}</td>
+                        <td>
+                            <span class="text-muted small">{{ lesson.content | slice:0:50 }}...</span>
+                        </td>
+                        <td>
+                            @if(lesson.videoUrl){
+                            <a [href]="lesson.videoUrl" target="_blank" class="btn btn-sm btn-outline-danger">
+                                <i class="fab fa-youtube"></i> Play
+                            </a>
+                            } @else {
+                            <span class="text-muted small">No Video</span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-light border text-primary me-2" (click)="handleEdit(lesson)"
+                                data-bs-toggle="modal" data-bs-target="#lessonModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light border text-danger" (click)="handleDelete(lesson.id)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            <p class="text-muted mb-0">No lessons found for this course. Start by adding one!</p>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-add-lesson-modal 
+  [lessonToEdit]="selectedLesson" 
+  [courseId]="courseId">
+</app-add-lesson-modal>
