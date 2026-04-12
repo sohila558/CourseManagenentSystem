@@ -7,6 +7,7 @@ import { selectAllCourses } from '../../../Store/Course/course.selector';
 import { selectCurrentUser } from '../../../Store/Auth/auth.selector';
 import { addCourse, deleteCourse, loadCourses, updateCourse } from '../../../Store/Course/course.action';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-courses',
@@ -18,6 +19,7 @@ export class ManageCoursesComponent implements OnInit {
 
   private _store = inject(Store);
   private _fb = inject(FormBuilder);
+  private _toastr = inject(ToastrService);
   private _searchSubject = new BehaviorSubject<string>('');
 
   courseForm!: FormGroup;
@@ -56,9 +58,11 @@ export class ManageCoursesComponent implements OnInit {
 
       if (this.editingCourseId) {
         this._store.dispatch(updateCourse({ course: { ...courseData, id: this.editingCourseId } }));
+        this._toastr.success('Course updated successfully!', 'Updated')
       } else {
         const newCourse = { ...courseData, id: 'c' + Math.floor(Math.random() * 1000) };
         this._store.dispatch(addCourse({ course: newCourse }));
+        this._toastr.success('Course added Successfully!', 'Success');
       }
 
       this.courseForm.reset({ instructorName: 'Mahmoud Rayan' });
@@ -78,6 +82,7 @@ export class ManageCoursesComponent implements OnInit {
   onDeleteCourse(id: string) {
     if (confirm('Are you sure you want to delete this course?')) {
       this._store.dispatch(deleteCourse({ id }));
+      this._toastr.error('Course deleted Successfully!', 'Deleted');
     }
   }
 }

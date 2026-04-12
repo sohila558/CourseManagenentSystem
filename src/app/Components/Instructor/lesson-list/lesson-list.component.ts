@@ -8,6 +8,7 @@ import { selectAllLesson, selectLessonsLoading } from '../../../Store/Lesson/les
 import { map } from 'rxjs';
 import { selectCourseById } from '../../../Store/Course/course.selector';
 import { loadCourses } from '../../../Store/Course/course.action';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lesson-list',
@@ -20,6 +21,7 @@ export class LessonListComponent implements OnInit {
   private _route = inject(ActivatedRoute);
   private _store = inject(Store);
   private _fb = inject(FormBuilder);
+  private _toastr = inject(ToastrService);
 
   courseId = this._route.snapshot.paramMap.get('id');
 
@@ -43,8 +45,8 @@ export class LessonListComponent implements OnInit {
 
   initForm() {
     this.lessonForm = this._fb.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
       videoUrl: ['', [Validators.required]],
       courseId: [this.courseId],
       order: [0] 
@@ -55,15 +57,16 @@ export class LessonListComponent implements OnInit {
     if (this.lessonForm.valid) {
       const newLesson = { ...this.lessonForm.value };
       this._store.dispatch(addLesson({ lesson: newLesson }));
+      this._toastr.success('Lesson added successfully!', 'Success');
       
       this.lessonForm.reset({ courseId: this.courseId });
-      alert('Action dispatched! Check your Redux DevTools.');
     }
   }
 
   deleteLesson(id: string) {
     if (confirm('Are you sure you want to delete this lesson?')) {
       this._store.dispatch(deleteLesson({ id }));
+      this._toastr.error('Lesson deleted successfully!', 'Deleted');
     }
   }
 }

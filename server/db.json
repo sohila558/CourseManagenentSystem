@@ -107,12 +107,12 @@
       "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070"
     },
     {
-      "id": "c102",
       "title": "Full-Stack .NET Core",
       "category": "Development",
-      "instructorName": "Mahmoud Rayan",
       "description": "Build enterprise apps with C#, .NET Web API, and SQL Server.",
-      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070"
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070",
+      "instructorName": "Mahmoud Rayan",
+      "id": "c102"
     },
     {
       "id": "c103",
