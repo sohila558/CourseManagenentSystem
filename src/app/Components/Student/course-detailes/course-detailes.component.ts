@@ -13,6 +13,7 @@ import { selectAllWishlist } from '../../../Store/Wishlist/wishlist.selector';
 import { addToWishlist, removeFromWishlist } from '../../../Store/Wishlist/wishlist.action';
 import { WishlistItem } from '../../../Models/wishlist';
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-detailes',
@@ -25,6 +26,7 @@ export class CourseDetailesComponent implements OnInit {
   private _route = inject(ActivatedRoute);
   private _store = inject(Store);
   private _authService = inject(AuthService);
+  private _toastr = inject(ToastrService);
 
   courseId: string | null = null;
   course$!: Observable<any>;
@@ -57,7 +59,7 @@ export class CourseDetailesComponent implements OnInit {
   enroll() {
     const user = this._authService.getUserFromStorage();
     if (!user) {
-      alert('Please login first to enroll!');
+      this._toastr.warning('Please login first to enroll!')
       return;
     }
 
@@ -76,7 +78,7 @@ export class CourseDetailesComponent implements OnInit {
         };
 
         this._store.dispatch(enrollStudent({ enrollment: newEnrollment }));
-        alert(`Successfully enrolled in ${course.title}!`);
+        this._toastr.success(`Successfully enrolled in ${course.title}!`, 'Success');
       }
     });
   }
@@ -88,8 +90,9 @@ export class CourseDetailesComponent implements OnInit {
 
         if (currentEnrollment) {
           this._store.dispatch(cancelEnrollment({ enrollmentId: currentEnrollment.id }));
-          alert('Enrollment canceled');
+          this._toastr.error('Enrollment canceled!')
         } else {
+          this._toastr.error('Something went wrong!');
           console.error("Enrollment ID not found");
         }
       });
@@ -99,7 +102,7 @@ export class CourseDetailesComponent implements OnInit {
   toggleWishlist() {
     const user = this._authService.getUserFromStorage();
     if (!user) {
-      alert('Please login first!');
+      this._toastr.warning('Please login first!');
       return;
     }
 
@@ -107,7 +110,10 @@ export class CourseDetailesComponent implements OnInit {
       if (exists) {
         this._store.select(selectAllWishlist).pipe(take(1)).subscribe(items => {
           const item = items.find(i => i.courseId === this.courseId);
-          if (item) this._store.dispatch(removeFromWishlist({ itemId: item.id }));
+          if (item) {
+            this._store.dispatch(removeFromWishlist({ itemId: item.id }));
+            this._toastr.error('Course removed From Wishlist!', 'Canceled')
+          }
         });
       } else {
         this.course$.pipe(take(1)).subscribe(course => {
@@ -121,6 +127,7 @@ export class CourseDetailesComponent implements OnInit {
               userId: user.id
             };
             this._store.dispatch(addToWishlist({ item: wishItem }));
+            this._toastr.success('Course added to wishlist successfully!', 'Success');
           }
         });
       }

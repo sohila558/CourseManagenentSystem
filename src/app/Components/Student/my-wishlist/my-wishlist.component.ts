@@ -7,6 +7,7 @@ import { AuthService } from '../../../Services/Auth/auth.service';
 import { map, Observable } from 'rxjs';
 import { loadWishlist, removeFromWishlist } from '../../../Store/Wishlist/wishlist.action';
 import { selectAllWishlist } from '../../../Store/Wishlist/wishlist.selector';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-wishlist',
@@ -18,6 +19,7 @@ export class MyWishlistComponent implements OnInit{
 
   private _store = inject(Store);
   private _authService = inject(AuthService);
+  private _toastr = inject(ToastrService);
 
   wishlistItems$!: Observable<any[]>;
 
@@ -35,6 +37,7 @@ export class MyWishlistComponent implements OnInit{
   remove(id: string) {
     if (confirm('Remove from wishlist?')) {
       this._store.dispatch(removeFromWishlist({ itemId: id }));
+      this._toastr.error('Course removed from wishlist successfully!', 'Remove');
     }
   }
 }
