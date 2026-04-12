@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectAllUsers } from '../../../../Store/Users/Users.selector';
 import { map } from 'rxjs';
 import { loadUsers } from '../../../../Store/Users/Users.action';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-course-modal',
@@ -17,6 +18,7 @@ export class AddCourseModalComponent implements OnInit{
   
   private _fb = inject(FormBuilder);
   private _store = inject(Store);
+  private _toastr = inject(ToastrService); 
   
   instructors$ = this._store.select(selectAllUsers).pipe(
     map(users => users.filter(user => user.role === 'Instructor'))
@@ -43,6 +45,7 @@ export class AddCourseModalComponent implements OnInit{
       };
 
       this.courseAdded.emit(newCourse);
+      this._toastr.success('Course Added Successfuly!')
       this.courseForm.reset();
 
       const modalElement = document.getElementById('addCourseModal');

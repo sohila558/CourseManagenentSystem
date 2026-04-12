@@ -3,7 +3,8 @@ import { provideRouter, withComponentInputBinding, withViewTransitions } from '@
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { authReducer } from './Store/Auth/auth.reducer';
@@ -37,6 +38,12 @@ export const appConfig: ApplicationConfig = {
       wishlist : wishlistReducer
     }),
     provideEffects([AuthEffect, UserEffects, CourseEffect, LessonEffect, EnrollmentEffect, WishlistEffects]),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideAnimations(),
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ]
 };
