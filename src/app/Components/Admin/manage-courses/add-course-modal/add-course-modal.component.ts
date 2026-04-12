@@ -45,7 +45,7 @@ export class AddCourseModalComponent implements OnInit{
       };
 
       this.courseAdded.emit(newCourse);
-      this._toastr.success('Course Added Successfuly!')
+      this._toastr.success('Course Added Successfuly!', 'Done')
       this.courseForm.reset();
 
       const modalElement = document.getElementById('addCourseModal');

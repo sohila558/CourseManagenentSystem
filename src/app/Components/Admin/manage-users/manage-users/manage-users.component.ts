@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { selectAllEnrollments } from '../../../../Store/Enrollments/enrollment.selector';
 import { loadEnrollments } from '../../../../Store/Enrollments/enrollment.action';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-users',
@@ -21,6 +22,7 @@ export class ManageUsersComponent implements OnInit {
 
   private _route = inject(ActivatedRoute);
   private _store = inject(Store);
+  private _toastr = inject(ToastrService);
   private _searchTerm$ = new BehaviorSubject<string>('');
   selectedUser: User | null = null;
 
@@ -62,6 +64,7 @@ export class ManageUsersComponent implements OnInit {
   handleDelete(id: string) {
     if (confirm('Are you sure you want to delete this User?')) {
       this._store.dispatch(deleteUser({ id }));
+      this._toastr.error('User deleted successfully!', 'Deleted');
     }
   }
 

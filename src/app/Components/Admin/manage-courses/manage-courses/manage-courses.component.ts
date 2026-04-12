@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { selectAllCourses } from '../../../../Store/Course/course.selector';
 import { addCourse, deleteCourse, loadCourses } from '../../../../Store/Course/course.action';
 import { Course } from '../../../../Models/course';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-courses',
@@ -18,6 +19,7 @@ export class ManageCoursesComponent implements OnInit {
 
   private _store = inject(Store);
   private _router = inject(Router);
+  private _toastr = inject(ToastrService);
 
   courses$ = this._store.select(selectAllCourses);
 
@@ -36,11 +38,13 @@ export class ManageCoursesComponent implements OnInit {
   onDelete(id: string) {
     if (confirm('Are you sure you want to delete this course?')) {
       this._store.dispatch(deleteCourse({ id }));
+      this._toastr.error('Course deleted successfully!', 'Deleted')
     }
   }
 
   onCourseAdded(newCourse: Course) {
     this._store.dispatch(addCourse({ course: newCourse }));
+    this._toastr.success('New Courses has been added!', 'Success')
   }
 
 }

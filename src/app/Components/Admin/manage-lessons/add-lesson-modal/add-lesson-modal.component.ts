@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Store } from '@ngrx/store';
 import { Lesson } from '../../../../Models/lesson';
 import { addLesson, updateLesson } from '../../../../Store/Lesson/lesson.action';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-lesson-modal',
@@ -15,6 +16,7 @@ export class AddLessonModalComponent implements OnInit, OnChanges {
 
   private _fb = inject(FormBuilder);
   private _store = inject(Store);
+  private _toastr = inject(ToastrService);
 
   @Input() lessonToEdit: Lesson | null = null;
   @Input() courseId! : string;
@@ -43,17 +45,24 @@ export class AddLessonModalComponent implements OnInit, OnChanges {
     if(this.lessonForm.valid) {
       const lessonData : Lesson = {
         ...this.lessonForm.value,
-        id: this.lessonToEdit ? this.lessonToEdit.id : Math.random().toString(36).substr(2, 9),
+        id: this.lessonToEdit ? this.lessonToEdit.id : Math.random().toString(36).substring(2, 9),
         courseId: this.courseId
       };
 
       if(this.lessonToEdit) {
         this._store.dispatch(updateLesson({ lesson : lessonData }));
+        this._toastr.success('Lesson updated Successfully!', 'Updated');
       } else {
         this._store.dispatch(addLesson({ lesson : lessonData }))
+        this._toastr.success('Lesson added Successfully!', 'Success')
       }
 
       this.lessonForm.reset();
+      const modalElement = document.getElementById('lessonModal'); 
+      if (modalElement) {
+        const modalInstance = (window as any).bootstrap.Modal.getInstance(modalElement);
+        modalInstance?.hide();
+      }
     }
   }
 

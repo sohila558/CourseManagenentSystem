@@ -6,10 +6,11 @@ import { selectAllLesson } from '../../../../Store/Lesson/lesson.selector';
 import { Lesson } from '../../../../Models/lesson';
 import { deleteLesson, loadLessons } from '../../../../Store/Lesson/lesson.action';
 import { AddLessonModalComponent } from "../add-lesson-modal/add-lesson-modal.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-lessons',
-  imports: [CommonModule, RouterLink, AddLessonModalComponent],
+  imports: [CommonModule, RouterLink, AddLessonModalComponent, AsyncPipe],
   templateUrl: './manage-lessons.component.html',
   styleUrl: './manage-lessons.component.css'
 })
@@ -17,6 +18,7 @@ export class ManageLessonsComponent implements OnInit{
 
   private _route = inject(ActivatedRoute);
   private _store = inject(Store);
+  private _toastr = inject(ToastrService);
   
   courseId! : string;
   lessons$ = this._store.select(selectAllLesson);
@@ -34,7 +36,8 @@ export class ManageLessonsComponent implements OnInit{
 
   handleDelete(id : string){
     if(confirm('Are You sure you want to delete this Lesson?')){
-      this._store.dispatch(deleteLesson({ id }))
+      this._store.dispatch(deleteLesson({ id }));
+      this._toastr.error('Lesson deleted successfully!', 'Deleted');
     }
   }
 
