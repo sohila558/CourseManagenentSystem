@@ -66,15 +66,6 @@
   ],
   "enrollments": [
     {
-      "id": "7",
-      "courseId": "c102",
-      "courseTitle": "Full-Stack .NET Core",
-      "studentId": "6",
-      "studentName": "Youssef Ali",
-      "instructorName": "Mahmoud Rayan",
-      "enrollDate": "2026-04-10"
-    },
-    {
       "id": "dpq2hjgbj",
       "courseId": "c101",
       "courseTitle": "Angular Masterclass",
@@ -95,6 +86,28 @@
       "studentId": "3",
       "studentName": "Sarah Ahmed",
       "instructorName": "Mahmoud Rayan"
+    },
+    {
+      "id": "ddzah1l5j",
+      "courseId": "c102",
+      "courseTitle": "Full-Stack .NET Core",
+      "courseImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070",
+      "enrollDate": "2026-04-12T14:03:13.767Z",
+      "status": "Active",
+      "studentId": "3",
+      "studentName": "Sarah Ahmed",
+      "instructorName": "Mahmoud Rayan"
+    },
+    {
+      "id": "svad7cbqo",
+      "courseId": "c105",
+      "courseTitle": "Modern CSS with Sass",
+      "courseImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070",
+      "enrollDate": "2026-04-13T11:09:55.451Z",
+      "status": "Active",
+      "studentId": "3",
+      "studentName": "Sarah Ahmed",
+      "instructorName": "Eng. Mona Hassan"
     }
   ],
   "courses": [
@@ -212,11 +225,11 @@
       "userId": "3"
     },
     {
-      "id": "tk9vbdntc",
-      "courseId": "c105",
-      "courseTitle": "Modern CSS with Sass",
-      "courseImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=2070",
-      "addedDate": "2026-04-06T05:01:45.733Z",
+      "id": "ibtt7iefv",
+      "courseId": "c102",
+      "courseTitle": "Full-Stack .NET Core",
+      "courseImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070",
+      "addedDate": "2026-04-12T19:43:47.861Z",
       "userId": "3"
     }
   ]

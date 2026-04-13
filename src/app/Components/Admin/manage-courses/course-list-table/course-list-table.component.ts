@@ -13,7 +13,11 @@ export class CourseListTableComponent {
   @Input() courses : Course[] | null = null;
   @Output() delete = new EventEmitter<string>();
   @Output() viewLessons = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<Course>();
 
+  onEdit(course : Course) {
+    this.edit.emit(course);
+  }
   onDelete(id : string) {
     this.delete.emit(id);
   }
