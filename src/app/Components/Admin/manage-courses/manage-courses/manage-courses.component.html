@@ -17,5 +17,8 @@
   <app-course-list-table [courses]="courses$ | async" (edit)="handleEdit($event)" (delete)="onDelete($event)"
     (viewLessons)="viewLessons($event)">
   </app-course-list-table>
-  <app-add-course-modal (courseAdded)="onCourseAdded($event)" (courseUpdated)="onCourseUpdated($event)">
+  <app-add-course-modal 
+  [courseToEdit] = "selectedCourse"
+  (courseAdded)="onCourseAdded($event)" 
+  (courseUpdated)="onCourseUpdated($event)">
   </app-add-course-modal>
