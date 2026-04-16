@@ -34,9 +34,9 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
   @Output() courseUpdated = new EventEmitter<Course>();
 
   courseForm: FormGroup = this._fb.group({
-    title: ['', [Validators.required, Validators.minLength(3)]],
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]+$/)]],
     instructorName: ['', [Validators.required]],
-    description: ['', [Validators.required, Validators.minLength(10)]],
+    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]],
     image: ['']
   });
 
@@ -60,6 +60,11 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
     if (file) {
       this.selectedFileName = file.name;
       const reader = new FileReader();
+
+      if (file.size > 500 * 1024) {
+        alert("The image is too large, choose an image smaller than 300KB.");
+        return;
+      }
 
       reader.onload = () => {
         this.imagePreview = reader.result as string;
