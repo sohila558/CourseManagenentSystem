@@ -3,6 +3,7 @@ import { AuthGuard } from './Guards/auth.guard';
 import { RoleGuard } from './Guards/role.guard';
 import { LayoutComponent } from './Components/Instructor/layout/layout.component';
 import { LessonListComponent } from './Components/Instructor/lesson-list/lesson-list.component';
+import { LoginGuard } from './Guards/login.guard';
 
 // Lazy Loading => to loading just the needed component 
 // 1. Prevent the application from loading everything at once
@@ -16,6 +17,7 @@ export const routes: Routes = [
     },
     {
         path: 'auth',
+        canActivate: [LoginGuard],
         loadComponent: () => import('./Components/Auth/login/login.component').then(m => m.LoginComponent)
     },
     {
