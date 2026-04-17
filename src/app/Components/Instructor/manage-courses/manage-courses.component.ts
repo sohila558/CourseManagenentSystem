@@ -44,9 +44,9 @@ export class ManageCoursesComponent implements OnInit {
   ngOnInit(): void {
     this._store.dispatch(loadCourses());
     this.courseForm = this._fb.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
       category: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.maxLength(150)]],
       image: ['', [Validators.required]],
       instructorName: ['Mahmoud Rayan']
     });
