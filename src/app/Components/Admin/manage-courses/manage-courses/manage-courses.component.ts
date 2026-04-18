@@ -47,15 +47,4 @@ export class ManageCoursesComponent implements OnInit {
     }
   }
 
-  onCourseAdded(newCourse: Course) {
-    this._store.dispatch(addCourse({ course: newCourse }));
-    this._toastr.success('New Courses has been added!', 'Success')
-  }
-
-  onCourseUpdated(updatedCourse : Course) {
-    this._store.dispatch(updateCourse({ course : updatedCourse }));
-    this._toastr.info('Course Updated Successfully!', 'Updated');
-    this.selectedCourse = null;
-  }
-
 }

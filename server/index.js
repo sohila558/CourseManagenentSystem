@@ -4,7 +4,19 @@ const fs = require('fs'); // File System library for creating folders or reading
 const express = require('express'); // The basic framework for building the server and APIs.
 const cors = require('cors'); // A module that allows Angular (port 4200) to communicate with Node (port 3000) without security issues.
 
+const dbPath = path.join(__dirname, 'db.json');
+
+function loadData() {
+    const rawData = fs.readFileSync(dbPath);
+    return JSON.parse(rawData);
+}
+
 const app = express(); // Create a copy of the Express app to start using it
+
+const data = loadData();
+let courses = data.courses || [];
+let users = data.users || [];
+let enrollments = data.enrollments || [];
 
 app.use(cors()); // Activate CORS so the server can accept requests from other links.
 app.use(express.json()); // This allows the server to understand the data coming in JSON format and convert it into an object.
@@ -32,17 +44,28 @@ const storage = multer.diskStorage({
 // Create a ready-to-use copy of Multer with the settings we made above.
 const upload = multer({ storage : storage });
 
+app.get('/courses', (req, res) => {
+    res.json(courses);
+});
+
+app.get('/courses/:id', (req, res) => {
+    const course = courses.find(c => c.id == req.params.id);
+    course ? res.json(course) : res.status(404).json({ message: 'Course not found' });
+});
+
 // Route responsible for adding a new course.
 // Pay attention: upload.single('image') is what holds the image and stores it before going into the rest of the code.
-app.post('/api/courses', upload.single('image'), (req, res) => {
+app.post('/courses', upload.single('image'), (req, res) => {
     try {
         const newCourse = {
+            id: Date.now(),
             title: req.body.title,
             description: req.body.description,
             instructorName: req.body.instructorName,
             image: `http://localhost:3000/uploads/${req.file.filename}` // The full link to the image after it was saved.
         };
 
+        courses.push(newCourse);
         // Reply to Angular successfully and send the new course data.
         res.status(201).json(newCourse);
 
@@ -51,6 +74,32 @@ app.post('/api/courses', upload.single('image'), (req, res) => {
         res.status(500).json({ message: 'Error uploading file' });
     }
 });
+
+app.put('/courses/:id', upload.single('image'), (req, res) => {
+    const id = req.params.id;
+    const index = courses.findIndex(c => c.id == id);
+
+    if (index !== -1) {
+        courses[index] = {
+            ...courses[index], 
+            ...req.body,       
+            id: Number(id),    
+            image: req.file ? `http://localhost:3000/uploads/${req.file.filename}` : courses[index].image
+        };
+        res.json(courses[index]);
+    } else {
+        res.status(404).json({ message: 'Course not found' });
+    }
+});
+
+app.delete('/courses/:id', (req, res) => {
+    const id = req.params.id;
+    courses = courses.filter(c => c.id != id);
+    res.status(200).json({ message: 'Course deleted successfully' });
+});
+
+app.get('/users', (req, res) => res.json(users));
+app.get('/enrollments', (req, res) => res.json(enrollments));
 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');

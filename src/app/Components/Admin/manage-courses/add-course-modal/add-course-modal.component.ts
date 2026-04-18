@@ -23,6 +23,7 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
 
   imagePreview: string | null = null;
   selectedFileName: string = '';
+  selectedFile: File | null = null; 
 
   instructors$ = this._store.select(selectAllUsers).pipe(
     map(users => users.filter(user => user.role === 'Instructor'))
@@ -34,7 +35,7 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
   @Output() courseUpdated = new EventEmitter<Course>();
 
   courseForm: FormGroup = this._fb.group({
-    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]+$/)]],
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     instructorName: ['', [Validators.required]],
     description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(150)]],
     image: ['']
@@ -58,13 +59,10 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.selectedFile = file;
       this.selectedFileName = file.name;
+      
       const reader = new FileReader();
-
-      if (file.size > 500 * 1024) {
-        alert("The image is too large, choose an image smaller than 300KB.");
-        return;
-      }
 
       reader.onload = () => {
         this.imagePreview = reader.result as string;
@@ -78,34 +76,32 @@ export class AddCourseModalComponent implements OnInit, OnChanges {
   removeImage() {
     this.imagePreview = null;
     this.selectedFileName = '';
+    this.selectedFile = null;
     this.courseForm.patchValue({ image: '' });
   }
 
   onSubmit() {
     if (this.courseForm.valid) {
-      const formValues = this.courseForm.value;
+      const fd = new FormData();
+
+      fd.append('title', this.courseForm.get('title')?.value);
+      fd.append('instructorName', this.courseForm.get('instructorName')?.value);
+      fd.append('description', this.courseForm.get('description')?.value);
+
+      if(this.selectedFile){
+        fd.append('image', this.selectedFile);
+      }
 
       if (this.courseToEdit) {
 
-        const updatedCourse: Course = {
-          ...this.courseToEdit,
-          ...formValues,
-          image: this.imagePreview || this.courseToEdit.image
-        };
+        fd.append('id', this.courseToEdit.id.toString());
 
-        this._store.dispatch(updateCourse({ course: updatedCourse }));
+        this._store.dispatch(updateCourse({ course: fd }));
         this._toastr.info('Course Updated Successfully!', 'Updated');
 
       } else {
 
-        const newCourse: Course = {
-          ...formValues,
-          id: 'c' + Math.floor(Math.random() * 1000),
-          image: this.imagePreview,
-          lessons: []
-        };
-
-        this._store.dispatch(addCourse({ course: newCourse }));
+        this._store.dispatch(addCourse({ course: fd }));
         this._toastr.success('Course Added Successfully!', 'Success');
       }
 

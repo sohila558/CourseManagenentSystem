@@ -19,12 +19,12 @@ export class CourseService {
     return this._httpClient.get<Course>(`${environment.baseUrl}/courses/${id}`)
   }
 
-  addCourse(course : Course) : Observable<Course>{
+  addCourse(course : FormData) : Observable<Course>{
     return this._httpClient.post<Course>(`${environment.baseUrl}/courses`, course);
   }
 
-  updateCourse(updatedCourse : Course) : Observable<Course>{
-    return this._httpClient.put<Course>(`${environment.baseUrl}/courses/${updatedCourse.id}`, updatedCourse);
+  updateCourse(updatedCourse : FormData) : Observable<Course>{
+    return this._httpClient.put<Course>(`${environment.baseUrl}/courses/${updatedCourse.get('id')}`, updatedCourse);
   }
 
   deleteCourse(id : string) : Observable<void>{
