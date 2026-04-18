@@ -21,15 +21,10 @@ export const RoleGuard: CanActivateFn = (route, state) => {
                     currentRole = JSON.parse(userJson).role;
                 }
             }
-                console.log('Role from Store:', role);
-                console.log('Expected Role:', expectedRole);
-                console.log('Full Route Snapshot:', route);
-
-                if (currentRole === expectedRole) {
+                if (currentRole?.toLowerCase() === expectedRole?.toLowerCase()) {
                     return true;
                 }
                 else {
-                    console.warn('Access Denied: Roles do not match');
                     router.navigate(['/unauthorized']);
                     return false;
                 }

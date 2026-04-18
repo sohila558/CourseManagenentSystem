@@ -9,11 +9,10 @@ import { selectAllInstructor, selectAllStudents } from '../../../../Store/Users/
 import { loadUsers } from '../../../../Store/Users/Users.action';
 import { selectAllCourses } from '../../../../Store/Course/course.selector';
 import { loadCourses } from '../../../../Store/Course/course.action';
-import { LayoutComponent } from "../../layout/layout.component";
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [AsyncPipe, RouterLink, LayoutComponent],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })

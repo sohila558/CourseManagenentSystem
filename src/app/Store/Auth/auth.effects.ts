@@ -36,10 +36,12 @@ export class AuthEffect{
                 // Save userInfo in LocalStorage 
                 localStorage.setItem('user', JSON.stringify(user));  
                 
-                if(user.role === 'Admin'){
+                const role = user.role?.toLowerCase();
+
+                if(role === 'admin'){
                     this.router.navigate(['/admin']);
                 }
-                else if (user.role === 'Instructor'){
+                else if (role === 'instructor'){
                     this.router.navigate(['/instructor'])
                 }
                 else{
