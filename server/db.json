@@ -4,7 +4,7 @@
       "id": "1",
       "name": "Sohila Tarek",
       "email": "admin@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123ad",
       "role": "Admin",
       "token": "fake-jwt-token-1"
     },
@@ -12,7 +12,7 @@
       "id": "2",
       "name": "Ahmed Mohamed",
       "email": "student@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123st",
       "role": "Student",
       "token": "fake-jwt-token-2"
     },
@@ -20,7 +20,7 @@
       "id": "692",
       "name": "Mahmoud Rayan",
       "email": "instructor@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123in",
       "role": "Instructor",
       "token": "fake-jwt-token-0.056"
     },
@@ -28,7 +28,7 @@
       "id": "3",
       "name": "Sarah Ahmed",
       "email": "sarah@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123st",
       "role": "Student",
       "token": "fake-jwt-token-3"
     },
@@ -36,7 +36,7 @@
       "id": "4",
       "name": "Dr. Omar Khaled",
       "email": "omar@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123in",
       "role": "Instructor",
       "token": "fake-jwt-token-4"
     },
@@ -44,7 +44,7 @@
       "id": "6",
       "name": "Youssef Ali",
       "email": "youssef@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123st",
       "role": "Student",
       "token": "fake-jwt-token-6"
     },
@@ -52,14 +52,14 @@
       "id": "7",
       "name": "Eng. Mona Hassan",
       "email": "mona@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123in",
       "role": "Instructor",
       "token": "fake-jwt-token-7"
     },
     {
       "name": "Laila Ahmed",
       "email": "laila@test.com",
-      "password": "P@ssW0rd123",
+      "password": "P@ssW0rd123st",
       "role": "Student",
       "id": "221"
     }

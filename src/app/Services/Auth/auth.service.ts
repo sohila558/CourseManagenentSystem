@@ -12,20 +12,20 @@ export class AuthService {
   private httpClient = inject(HttpClient);
 
   login(email: string, password: string): Observable<User> {
-    return this.httpClient.get<User[]>(`${environment.baseUrl}/users?email=${email}&password=${password}`)
-      .pipe(
-        // switchMap => return Observable
-        // map => return Value
-        switchMap(users => {
-          if (users.length > 0) {
-            return of(users[0]);
-          } else {
-            // throwError => return Observable 
-            // So we have to use switchMap with throwError (both of them return Observable)
-            return throwError(() => new Error('Email or Password incorrect'));
-          }
-        })
-      );
+    return this.httpClient.post<User>(`${environment.baseUrl}/login`, {email, password})
+      // .pipe(
+      //   // switchMap => return Observable
+      //   // map => return Value
+      //   switchMap(users => {
+      //     if (users.length > 0) {
+      //       return of(users[0]);
+      //     } else {
+      //       // throwError => return Observable 
+      //       // So we have to use switchMap with throwError (both of them return Observable)
+      //       return throwError(() => new Error('Email or Password incorrect'));
+      //     }
+      //   })
+      // );
   }
 
   isLoggedIn(): boolean {

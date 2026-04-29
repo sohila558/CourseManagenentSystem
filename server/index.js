@@ -17,6 +17,8 @@ const data = loadData();
 let courses = data.courses || [];
 let users = data.users || [];
 let enrollments = data.enrollments || [];
+let lessons = data.lessons || [];
+let wishlist = data.wishlist || [];
 
 app.use(cors()); // Activate CORS so the server can accept requests from other links.
 app.use(express.json()); // This allows the server to understand the data coming in JSON format and convert it into an object.
@@ -44,6 +46,18 @@ const storage = multer.diskStorage({
 // Create a ready-to-use copy of Multer with the settings we made above.
 const upload = multer({ storage : storage });
 
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+        res.json(user);
+    } else {
+        res.status(401).json({ message: 'Invalid email or password' });
+    }
+});
+
 app.get('/courses', (req, res) => {
     res.json(courses);
 });
@@ -51,6 +65,16 @@ app.get('/courses', (req, res) => {
 app.get('/courses/:id', (req, res) => {
     const course = courses.find(c => c.id == req.params.id);
     course ? res.json(course) : res.status(404).json({ message: 'Course not found' });
+});
+
+app.get('/lessons', (req, res) => {
+    const courseId = req.query.courseId;
+    if (courseId) {
+        const filteredLessons = lessons.filter(l => l.courseId === courseId);
+        res.json(filteredLessons);
+    } else {
+        res.json(lessons);
+    }
 });
 
 // Route responsible for adding a new course.
@@ -100,6 +124,8 @@ app.delete('/courses/:id', (req, res) => {
 
 app.get('/users', (req, res) => res.json(users));
 app.get('/enrollments', (req, res) => res.json(enrollments));
+app.get('/lessons', (req, res) => res.json(lessons));
+app.get('/wishlist', (req, res) => res.json(wishlist));
 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
